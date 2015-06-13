@@ -37,12 +37,12 @@ public class EditorModel extends Observable {
 
     public EditorModel() {
         this.realm = new Realm();
+        executor = new DefaultExecutor();
         execute(new InitializeRealmCommand(realm));
         TileType wastelandTileType = realm.getTileTypeManager().getTileType("Wasteland");
         execute(new CreateMapCommand(realm, wastelandTileType, 80, 80));
         setCurrentTileType(wastelandTileType);
         editorMapZoomLevel = 3;
-        executor = new DefaultExecutor();
     }
 
     public CommandResult execute(Command command) {

@@ -24,7 +24,7 @@ public class Tests {
 	}
 	
 	@Test
-	public void testTraducaoMenuPrincipalPortugues () {
+	public void testTraducaoMenuPrincipalPorstugues () {
 		FreeMarsLauncher.main(null);
 		
 		FreeMarsController controller = new FreeMarsController();
