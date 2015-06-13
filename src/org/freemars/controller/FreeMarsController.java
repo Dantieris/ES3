@@ -348,7 +348,7 @@ public class FreeMarsController implements Executor {
         this.currentFrame = frame;
     }
 
-    private MainMenuFrame getMainMenuFrame() {
+    public MainMenuFrame getMainMenuFrame() {
         if (mainMenuFrame == null) {
             mainMenuFrame = new MainMenuFrame();
             mainMenuFrame.getMenuWindow().setContinueButtonAction(new ContinueGameAction(this));

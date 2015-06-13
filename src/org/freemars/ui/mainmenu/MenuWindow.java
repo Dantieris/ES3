@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.io.InputStream;
+
 import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -148,7 +149,7 @@ public class MenuWindow extends JDialog {
         return bottomPanel;
     }
 
-    private JButton getContinueButton() {
+    public JButton getContinueButton() {
         if (continueButton == null) {
             continueButton = new JButton();
         }
@@ -203,4 +204,6 @@ public class MenuWindow extends JDialog {
         }
         return exitButton;
     }
+
+
 }

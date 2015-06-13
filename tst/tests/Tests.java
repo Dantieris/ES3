@@ -4,7 +4,10 @@ import static org.junit.Assert.*;
 
 import org.freemars.FreeMarsLauncher;
 import org.freemars.controller.FreeMarsController;
+import org.freemars.controller.action.file.ContinueGameAction;
 import org.freemars.editor.EditorModel;
+import org.freemars.ui.mainmenu.MainMenuFrame;
+import org.freemars.ui.mainmenu.MenuWindow;
 import org.freerealm.Realm;
 import org.freerealm.executor.command.InitializeRealmCommand;
 import org.junit.Test;
@@ -18,6 +21,16 @@ public class Tests {
 		} catch (NullPointerException ex) {
 			fail("Não deveria lançar nenhuma exceção");
 		}
+	}
+	
+	@Test
+	public void testTraducaoMenuPrincipalPortugues () {
+		FreeMarsLauncher.main(null);
+		
+		FreeMarsController controller = new FreeMarsController();
+		
+		assertEquals("Continuar", controller.getMainMenuFrame().getMenuWindow().getContinueButton().getText());
+		
 	}
 
 }
