@@ -30,6 +30,13 @@ public class Tests {
 		FreeMarsController controller = new FreeMarsController();
 		
 		assertEquals("Continuar", controller.getMainMenuFrame().getMenuWindow().getContinueButton().getText());
+		assertEquals("Novo Jogo", controller.getMainMenuFrame().getMenuWindow().getNewButton().getText());
+		assertEquals("Carregar", controller.getMainMenuFrame().getMenuWindow().getOpenButton().getText());
+		assertEquals("Carregar Rápido", controller.getMainMenuFrame().getMenuWindow().getQuickLoadButton().getText());
+		assertEquals("Preferências", controller.getMainMenuFrame().getMenuWindow().getPreferencesButton().getText());
+		assertEquals("Editor de Mapas", controller.getMainMenuFrame().getMenuWindow().getEditorButton().getText());
+		assertEquals("Martepedia", controller.getMainMenuFrame().getMenuWindow().getMarsopediaButton().getText());
+		assertEquals("Sair do Jogo", controller.getMainMenuFrame().getMenuWindow().getExitButton().getText());
 		
 	}
 

@@ -156,49 +156,49 @@ public class MenuWindow extends JDialog {
         return continueButton;
     }
 
-    private JButton getNewButton() {
+    public JButton getNewButton() {
         if (newButton == null) {
             newButton = new JButton();
         }
         return newButton;
     }
 
-    private JButton getOpenButton() {
+    public JButton getOpenButton() {
         if (openButton == null) {
             openButton = new JButton();
         }
         return openButton;
     }
 
-    private JButton getQuickLoadButton() {
+    public JButton getQuickLoadButton() {
         if (quickLoadButton == null) {
             quickLoadButton = new JButton();
         }
         return quickLoadButton;
     }
 
-    private JButton getPreferencesButton() {
+    public JButton getPreferencesButton() {
         if (preferencesButton == null) {
             preferencesButton = new JButton();
         }
         return preferencesButton;
     }
 
-    private JButton getEditorButton() {
+    public JButton getEditorButton() {
         if (editorButton == null) {
             editorButton = new JButton();
         }
         return editorButton;
     }
 
-    private JButton getMarsopediaButton() {
+    public JButton getMarsopediaButton() {
         if (marsopediaButton == null) {
             marsopediaButton = new JButton();
         }
         return marsopediaButton;
     }
 
-    private JButton getExitButton() {
+    public JButton getExitButton() {
         if (exitButton == null) {
             exitButton = new JButton();
         }
