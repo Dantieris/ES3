@@ -27,7 +27,7 @@ public class ContinueGameAction extends AbstractAction {
     private final FreeMarsController freeMarsController;
 
     public ContinueGameAction(FreeMarsController controller) {
-        super("Continue");
+        super("Continuar");
         this.freeMarsController = controller;
     }
 

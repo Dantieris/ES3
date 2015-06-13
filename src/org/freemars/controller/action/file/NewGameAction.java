@@ -64,7 +64,7 @@ public class NewGameAction extends AbstractAction {
     private Realm realm;
 
     public NewGameAction(FreeMarsController controller) {
-        super("New game");
+        super("Novo Jogo");
         this.freeMarsController = controller;
     }
 

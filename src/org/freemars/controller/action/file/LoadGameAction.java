@@ -27,7 +27,7 @@ public class LoadGameAction extends AbstractAction {
     private FreeMarsController freeMarsController;
 
     public LoadGameAction(FreeMarsController controller) {
-        super("Load");
+        super("Carregar");
         this.freeMarsController = controller;
     }
 

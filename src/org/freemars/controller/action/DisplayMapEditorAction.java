@@ -14,7 +14,7 @@ public class DisplayMapEditorAction extends AbstractAction {
     private FreeMarsController controller;
 
     public DisplayMapEditorAction(FreeMarsController controller) {
-        super("Map editor", null);
+        super("Editor de Mapas", null);
         putValue(SHORT_DESCRIPTION, "Map editor");
         putValue(MNEMONIC_KEY, new Integer(KeyEvent.VK_E));
         this.controller = controller;

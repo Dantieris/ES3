@@ -15,7 +15,7 @@ public class ExitGameAction extends AbstractAction {
     private FreeMarsController controller;
 
     public ExitGameAction(FreeMarsController controller) {
-        super("Exit game");
+        super("Sair do Jogo");
         this.controller = controller;
     }
 

@@ -14,7 +14,7 @@ public class DisplayHelpContentsAction extends AbstractAction {
     private String helpId;
 
     public DisplayHelpContentsAction(FreeMarsController controller, String helpId) {
-        super("Marsopedia", null);
+        super("Martepedia", null);
         this.controller = controller;
         this.helpId = helpId;
     }
