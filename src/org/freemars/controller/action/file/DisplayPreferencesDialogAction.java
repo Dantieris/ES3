@@ -1,7 +1,9 @@
 package org.freemars.controller.action.file;
 
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
+
 import org.freemars.controller.FreeMarsController;
 import org.freemars.ui.player.preferences.ConfirmPreferencesAction;
 import org.freemars.ui.player.preferences.PreferencesDialog;
@@ -15,13 +17,13 @@ public class DisplayPreferencesDialogAction extends AbstractAction {
     private FreeMarsController controller;
 
     public DisplayPreferencesDialogAction(FreeMarsController controller) {
-        super("Preferências", null);
+        super(Messages.getString("DisplayPreferencesDialogAction.preferences"), null); //$NON-NLS-1$
         this.controller = controller;
     }
 
     public void actionPerformed(ActionEvent e) {
         PreferencesDialog preferencesDialog = new PreferencesDialog(controller.getCurrentFrame(), controller.getFreeMarsModel());
-        int autosavePeriodInTurns = Integer.parseInt(controller.getFreeMarsModel().getFreeMarsPreferences().getProperty("auto_save_period_in_turns"));
+        int autosavePeriodInTurns = Integer.parseInt(controller.getFreeMarsModel().getFreeMarsPreferences().getProperty("auto_save_period_in_turns")); //$NON-NLS-1$
         preferencesDialog.setAutosaveComboBoxSelectedIndex(getRelatedAutosaveComboBoxIndex(autosavePeriodInTurns));
         preferencesDialog.setConfirmButtonAction(new ConfirmPreferencesAction(controller, preferencesDialog));
         preferencesDialog.display();

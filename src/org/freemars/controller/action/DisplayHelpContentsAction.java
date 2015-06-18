@@ -1,8 +1,11 @@
 package org.freemars.controller.action;
 
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
+
 import org.freemars.controller.FreeMarsController;
+import org.freemars.controller.action.file.Messages;
 
 /**
  *
@@ -14,7 +17,7 @@ public class DisplayHelpContentsAction extends AbstractAction {
     private String helpId;
 
     public DisplayHelpContentsAction(FreeMarsController controller, String helpId) {
-        super("Martepédia", null);
+        super(Messages.getString("DisplayHelpContentsAction.marspedia"), null); //$NON-NLS-1$
         this.controller = controller;
         this.helpId = helpId;
     }

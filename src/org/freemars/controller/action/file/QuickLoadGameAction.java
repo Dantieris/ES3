@@ -1,9 +1,12 @@
 package org.freemars.controller.action.file;
 
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
+
 import java.io.File;
 import java.util.Iterator;
+
 import org.apache.log4j.Logger;
 import org.freemars.ai.AIPlayer;
 import org.freemars.controller.FreeMarsController;
@@ -26,13 +29,13 @@ public class QuickLoadGameAction extends AbstractAction {
     private final FreeMarsController freeMarsController;
 
     public QuickLoadGameAction(FreeMarsController freeMarsController) {
-        super("Carregar Rápido");
+        super(Messages.getString("QuickLoadGameAction.quick_load")); //$NON-NLS-1$
         this.freeMarsController = freeMarsController;
     }
 
     public void actionPerformed(ActionEvent e) {
-        String userHomeDirectory = System.getProperty("user.home");
-        File file = new File(userHomeDirectory + System.getProperty("file.separator") + "FreeMars" + System.getProperty("file.separator") + "FreeMarsQuickLoad.fms");
+        String userHomeDirectory = System.getProperty("user.home"); //$NON-NLS-1$
+        File file = new File(userHomeDirectory + System.getProperty("file.separator") + "FreeMars" + System.getProperty("file.separator") + "FreeMarsQuickLoad.fms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
         if (file.exists()) {
             boolean result = SaveLoadUtility.loadGameFromFile(freeMarsController, file);
             if (result) {
@@ -49,17 +52,17 @@ public class QuickLoadGameAction extends AbstractAction {
                 freeMarsController.displayGameFrame();
                 Realm realm = freeMarsController.getFreeMarsModel().getRealm();
                 freeMarsController.execute(new SetActivePlayerCommand(realm, freeMarsController.getFreeMarsModel().getActivePlayer()));
-                Logger.getLogger(QuickLoadGameAction.class).info("Quick load complete.");
-                boolean displayTipsOnStartup = Boolean.valueOf(freeMarsController.getFreeMarsModel().getFreeMarsPreferences().getProperty("display_tips_on_startup"));
+                Logger.getLogger(QuickLoadGameAction.class).info("Quick load complete."); //$NON-NLS-1$
+                boolean displayTipsOnStartup = Boolean.valueOf(freeMarsController.getFreeMarsModel().getFreeMarsPreferences().getProperty("display_tips_on_startup")); //$NON-NLS-1$
                 if (displayTipsOnStartup) {
                     new DisplayHelpTipAction(freeMarsController).actionPerformed(null);
                 } else {
-                    FreeMarsOptionPane.showMessageDialog(freeMarsController.getCurrentFrame(), "Load complete");
+                    FreeMarsOptionPane.showMessageDialog(freeMarsController.getCurrentFrame(), Messages.getString("QuickLoadGameAction.load_complete")); //$NON-NLS-1$
                 }
             }
         } else {
-            Logger.getLogger(QuickLoadGameAction.class).info("Could not find quick load file.");
-            FreeMarsOptionPane.showMessageDialog(freeMarsController.getCurrentFrame(), "Could not find quick load file");
+            Logger.getLogger(QuickLoadGameAction.class).info("Could not find quick load file."); //$NON-NLS-1$
+            FreeMarsOptionPane.showMessageDialog(freeMarsController.getCurrentFrame(), Messages.getString("QuickLoadGameAction.quick_file_not_found")); //$NON-NLS-1$
         }
     }
 }

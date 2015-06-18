@@ -1,11 +1,15 @@
 package org.freemars.controller.action.file;
 
 import org.freemars.ui.util.FreeMarsSaveFileChooser;
+
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
+
 import java.io.File;
 import java.util.Iterator;
+
 import org.freemars.ai.AIPlayer;
 import org.freemars.controller.FreeMarsController;
 import org.freemars.controller.action.DisplayHelpTipAction;
@@ -27,7 +31,7 @@ public class LoadGameAction extends AbstractAction {
     private FreeMarsController freeMarsController;
 
     public LoadGameAction(FreeMarsController controller) {
-        super("Carregar");
+        super(Messages.getString("LoadGameAction.Load")); //$NON-NLS-1$
         this.freeMarsController = controller;
     }
 
@@ -50,14 +54,14 @@ public class LoadGameAction extends AbstractAction {
                 freeMarsController.displayGameFrame();
                 Realm realm = freeMarsController.getFreeMarsModel().getRealm();
                 freeMarsController.execute(new SetActivePlayerCommand(realm, freeMarsController.getFreeMarsModel().getActivePlayer()));
-                boolean displayTipsOnStartup = Boolean.valueOf(freeMarsController.getFreeMarsModel().getFreeMarsPreferences().getProperty("display_tips_on_startup"));
+                boolean displayTipsOnStartup = Boolean.valueOf(freeMarsController.getFreeMarsModel().getFreeMarsPreferences().getProperty("display_tips_on_startup")); //$NON-NLS-1$
                 if (displayTipsOnStartup) {
                     new DisplayHelpTipAction(freeMarsController).actionPerformed(null);
                 } else {
-                    FreeMarsOptionPane.showMessageDialog(freeMarsController.getCurrentFrame(), "Load complete");
+                    FreeMarsOptionPane.showMessageDialog(freeMarsController.getCurrentFrame(), Messages.getString("LoadGameAction.load_complete")); //$NON-NLS-1$
                 }
             } else {
-                FreeMarsOptionPane.showMessageDialog(freeMarsController.getCurrentFrame(), "Error while loading game");
+                FreeMarsOptionPane.showMessageDialog(freeMarsController.getCurrentFrame(), Messages.getString("LoadGameAction.error_loading_game")); //$NON-NLS-1$
             }
         }
     }
