@@ -26,7 +26,7 @@ public class QuickLoadGameAction extends AbstractAction {
     private final FreeMarsController freeMarsController;
 
     public QuickLoadGameAction(FreeMarsController freeMarsController) {
-        super("Carregar Rápido");
+        super("Carregar RÃ¡pido");
         this.freeMarsController = freeMarsController;
     }
 
