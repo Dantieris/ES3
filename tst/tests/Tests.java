@@ -10,34 +10,58 @@ import org.freemars.ui.mainmenu.MainMenuFrame;
 import org.freemars.ui.mainmenu.MenuWindow;
 import org.freerealm.Realm;
 import org.freerealm.executor.command.InitializeRealmCommand;
+import org.junit.Before;
 import org.junit.Test;
 
 public class Tests {
-
-	@Test
-	public void testAbrirTelaDeEdicaoDeMapaNaoLancaNullPointerException() {
-		try {
-			new EditorModel().execute(new InitializeRealmCommand(new Realm()));
-		} catch (NullPointerException ex) {
-			fail("Não deveria lançar nenhuma exceção");
-		}
+	
+	private FreeMarsController controller;
+	
+	@Before
+	public void before() {
+		FreeMarsLauncher.main(null);
+		
+		controller = new FreeMarsController();
 	}
 	
 	@Test
-	public void testTraducaoMenuPrincipalPorstugues () {
-		FreeMarsLauncher.main(null);
-		
-		FreeMarsController controller = new FreeMarsController();
-		
+	public void testTraducaoContinue() {		
 		assertEquals("Continuar", controller.getMainMenuFrame().getMenuWindow().getContinueButton().getText());
-		assertEquals("Novo Jogo", controller.getMainMenuFrame().getMenuWindow().getNewButton().getText());
+	}
+	
+	@Test
+	public void testTraducaoNewGame() {		
+		assertEquals("Novo jogo", controller.getMainMenuFrame().getMenuWindow().getNewButton().getText());
+	}
+	
+	@Test
+	public void testTraducaoLoad() {		
 		assertEquals("Carregar", controller.getMainMenuFrame().getMenuWindow().getOpenButton().getText());
-		assertEquals("Carregar Rápido", controller.getMainMenuFrame().getMenuWindow().getQuickLoadButton().getText());
-		assertEquals("Preferências", controller.getMainMenuFrame().getMenuWindow().getPreferencesButton().getText());
-		assertEquals("Editor de Mapas", controller.getMainMenuFrame().getMenuWindow().getEditorButton().getText());
-		assertEquals("Martepedia", controller.getMainMenuFrame().getMenuWindow().getMarsopediaButton().getText());
-		assertEquals("Sair do Jogo", controller.getMainMenuFrame().getMenuWindow().getExitButton().getText());
-		
+	}
+	
+	@Test
+	public void testTraducaoQuickLoad() {		
+		assertEquals("Carregar rÃ¡pido", controller.getMainMenuFrame().getMenuWindow().getQuickLoadButton().getText());
+	}
+	
+	@Test
+	public void testTraducaoPreferences() {
+		assertEquals("PreferÃªncias", controller.getMainMenuFrame().getMenuWindow().getPreferencesButton().getText());
+	}
+	
+	@Test
+	public void testTraducaoMapEditor() {
+		assertEquals("Editor de mapas", controller.getMainMenuFrame().getMenuWindow().getEditorButton().getText());
+	}
+	
+	@Test
+	public void testTraducaoMarspedia() {
+		assertEquals("MartepÃ©dia", controller.getMainMenuFrame().getMenuWindow().getMarsopediaButton().getText());
+	}
+	
+	@Test
+	public void testTraducaoExitGame() {
+		assertEquals("Sair do jogo", controller.getMainMenuFrame().getMenuWindow().getExitButton().getText());
 	}
 
 }

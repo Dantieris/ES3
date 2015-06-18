@@ -1,18 +1,22 @@
 package org.freemars.controller.action.file;
 
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
+
 import org.freerealm.executor.command.AddPlayerCommand;
 import org.freerealm.executor.command.AddUnitCommand;
 import org.freerealm.executor.command.CreateMapCommand;
 import org.freerealm.executor.command.ReadMapFileCommand;
 import org.freerealm.executor.command.SetActivePlayerCommand;
+
 import java.awt.Color;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.TreeMap;
+
 import org.freerealm.map.Coordinate;
 import org.freerealm.tile.Tile;
 import org.freerealm.tile.TileType;
@@ -21,9 +25,11 @@ import org.freerealm.nation.Nation;
 import org.freerealm.unit.Unit;
 import org.freerealm.unit.UnitType;
 import org.freemars.controller.FreeMarsController;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.freemars.command.ResetFreeMarsModelCommand;
 import org.freemars.ai.DecisionModel;
@@ -64,16 +70,16 @@ public class NewGameAction extends AbstractAction {
     private Realm realm;
 
     public NewGameAction(FreeMarsController controller) {
-        super("Novo Jogo");
+        super(Messages.getString("NewGameAction.new_game")); //$NON-NLS-1$
         this.freeMarsController = controller;
     }
 
     public void actionPerformed(ActionEvent e) {
         if (!freeMarsController.isMainMenuFrameVisible()) {
-            Object[] options = {"Yes, start new game", "No, thanks"};
+            Object[] options = {Messages.getString("NewGameAction.yes_new_game"), Messages.getString("NewGameAction.no_thanks")}; //$NON-NLS-1$ //$NON-NLS-2$
             int value = JOptionPane.showOptionDialog(freeMarsController.getCurrentFrame(),
-                    "Do you want to start a new game game?",
-                    "New game",
+                    Messages.getString("NewGameAction.want_start_game"), //$NON-NLS-1$
+                    Messages.getString("NewGameAction.new_game2"), //$NON-NLS-1$
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE,
                     null,
@@ -111,7 +117,7 @@ public class NewGameAction extends AbstractAction {
             } else {
                 String premadeMapPath = newGameOptions.getPremadeMapPath();
                 InputStream inputStream;
-                if (premadeMapPath.startsWith("maps/")) {
+                if (premadeMapPath.startsWith("maps/")) { //$NON-NLS-1$
                     inputStream = ClassLoader.getSystemResourceAsStream(premadeMapPath);
                 } else {
                     try {
@@ -136,9 +142,9 @@ public class NewGameAction extends AbstractAction {
                 if (nation.equals(newGameOptions.getHumanPlayerNation())) {
                     player = new FreeMarsPlayer(freeMarsController.getFreeMarsModel().getRealm());
                     FirstArrivalToMarsMessage message = new FirstArrivalToMarsMessage();
-                    message.setSubject("Welcome to Red planet!");
+                    message.setSubject(Messages.getString("NewGameAction.welcome_planet")); //$NON-NLS-1$
                     message.setTurnSent(0);
-                    message.setText(new StringBuffer("After 6 months of voyage you have arrived to Mars.\nYour shuttle is waiting in orbit."));
+                    message.setText(new StringBuffer(Messages.getString("NewGameAction.end_trip_message"))); //$NON-NLS-1$
                     player.addMessage(message);
                 } else {
                     player = new AIPlayer(freeMarsController.getFreeMarsModel().getRealm());
@@ -169,7 +175,7 @@ public class NewGameAction extends AbstractAction {
                 }
             }
             new MissionReader().readMissions(freeMarsController);
-            Logger.getLogger(NewGameAction.class).info("Starting a new game.");
+            Logger.getLogger(NewGameAction.class).info("Starting a new game."); //$NON-NLS-1$
             freeMarsController.executeViewCommand(new ClearPaintModelsCommand(freeMarsController));
             freeMarsController.executeViewCommand(new UpdateExploredAreaPaintModelsCommand(freeMarsController));
             freeMarsController.executeViewCommand(new RepaintMapPanelCommand(freeMarsController));
@@ -185,29 +191,29 @@ public class NewGameAction extends AbstractAction {
     private ExpeditionaryForcePlayer getRelatedExpeditionaryForcePlayer(FreeMarsModel freeMarsModel, Player player) {
         ExpeditionaryForcePlayer expeditionaryForcePlayer = new ExpeditionaryForcePlayer(freeMarsModel.getRealm());
         expeditionaryForcePlayer.setId(freeMarsModel.getRealm().getPlayerManager().getNextAvailablePlayerId());
-        expeditionaryForcePlayer.setName(player.getNation().getAdjective() + " expeditionary force");
+        expeditionaryForcePlayer.setName(player.getNation().getAdjective() + Messages.getString("NewGameAction.expeditionary_force")); //$NON-NLS-1$
         expeditionaryForcePlayer.setNation(player.getNation());
         expeditionaryForcePlayer.setPrimaryColor(Color.black);
         expeditionaryForcePlayer.setSecondaryColor(Color.lightGray);
         expeditionaryForcePlayer.setTargetPlayerId(player.getId());
         expeditionaryForcePlayer.setDecisionModel(new ExpeditionaryForceDecisionModel(freeMarsController, expeditionaryForcePlayer));
         freeMarsController.execute(new SetPlayerStatusCommand(expeditionaryForcePlayer, Player.STATUS_PASSIVE));
-        UnitType infantryUnitType = freeMarsModel.getRealm().getUnitTypeManager().getUnitType("Infantry");
+        UnitType infantryUnitType = freeMarsModel.getRealm().getUnitTypeManager().getUnitType("Infantry"); //$NON-NLS-1$
         for (int i = 0; i < ExpeditionaryForcePlayer.BASE_INFANTRY_COUNT; i++) {
             Unit infantryUnit = new Unit(freeMarsModel.getRealm(), infantryUnitType, null, expeditionaryForcePlayer);
             freeMarsController.execute(new AddUnitCommand(realm, expeditionaryForcePlayer, infantryUnit, Unit.UNIT_SUSPENDED));
         }
-        UnitType mechUnitType = freeMarsModel.getRealm().getUnitTypeManager().getUnitType("Mech");
+        UnitType mechUnitType = freeMarsModel.getRealm().getUnitTypeManager().getUnitType("Mech"); //$NON-NLS-1$
         for (int i = 0; i < ExpeditionaryForcePlayer.BASE_MECH_COUNT; i++) {
             Unit mechUnit = new Unit(freeMarsModel.getRealm(), mechUnitType, null, expeditionaryForcePlayer);
             freeMarsController.execute(new AddUnitCommand(realm, expeditionaryForcePlayer, mechUnit, Unit.UNIT_SUSPENDED));
         }
-        UnitType LGTUnitType = freeMarsModel.getRealm().getUnitTypeManager().getUnitType("LGT");
+        UnitType LGTUnitType = freeMarsModel.getRealm().getUnitTypeManager().getUnitType("LGT"); //$NON-NLS-1$
         for (int i = 0; i < ExpeditionaryForcePlayer.BASE_LGT_COUNT; i++) {
             Unit LGTUnit = new Unit(freeMarsModel.getRealm(), LGTUnitType, null, expeditionaryForcePlayer);
             freeMarsController.execute(new AddUnitCommand(realm, expeditionaryForcePlayer, LGTUnit, Unit.UNIT_SUSPENDED));
         }
-        int expeditionaryForceFlightTurns = Integer.parseInt(realm.getProperty("expeditionary_force_flight_turns"));
+        int expeditionaryForceFlightTurns = Integer.parseInt(realm.getProperty("expeditionary_force_flight_turns")); //$NON-NLS-1$
         expeditionaryForcePlayer.setEarthToMarsFlightTurns(expeditionaryForceFlightTurns);
         return expeditionaryForcePlayer;
     }
@@ -217,12 +223,12 @@ public class NewGameAction extends AbstractAction {
         freeMarsController.execute(new AddPlayerCommand(realm, player));
         Coordinate coordinate = PlayerStartCoordinateGenerator.generate(freeMarsController);
         int scoutCount = 1;
-        UnitType scoutType = realm.getUnitTypeManager().getUnitType("Scout");
+        UnitType scoutType = realm.getUnitTypeManager().getUnitType("Scout"); //$NON-NLS-1$
         for (int i = 0; i < scoutCount; i++) {
             freeMarsController.execute(new AddUnitCommand(realm, player, new Unit(realm, scoutType, coordinate, player)));
         }
 
-        UnitType colonizerType = realm.getUnitTypeManager().getUnitType("Colonizer");
+        UnitType colonizerType = realm.getUnitTypeManager().getUnitType("Colonizer"); //$NON-NLS-1$
         int startupColonizerCount = 2;
         SetStartupUnitCountProperty setStartupUnitCount = (SetStartupUnitCountProperty) player.getProperty(SetStartupUnitCountProperty.NAME);
         if (setStartupUnitCount != null && colonizerType.equals(setStartupUnitCount.getUnitType())) {
@@ -231,11 +237,11 @@ public class NewGameAction extends AbstractAction {
         for (int i = 0; i < startupColonizerCount; i++) {
             freeMarsController.execute(new AddUnitCommand(realm, player, new Unit(realm, colonizerType, coordinate, player)));
         }
-        UnitType engineerType = realm.getUnitTypeManager().getUnitType("Engineer");
+        UnitType engineerType = realm.getUnitTypeManager().getUnitType("Engineer"); //$NON-NLS-1$
         freeMarsController.execute(new AddUnitCommand(realm, player, new Unit(realm, engineerType, coordinate, player)));
         freeMarsController.execute(new AddUnitCommand(realm, player, new Unit(realm, engineerType, coordinate, player)));
 
-        UnitType shuttleType = realm.getUnitTypeManager().getUnitType("Shuttle");
+        UnitType shuttleType = realm.getUnitTypeManager().getUnitType("Shuttle"); //$NON-NLS-1$
         Unit shuttle = new Unit(realm, shuttleType, coordinate, player);
         freeMarsController.execute(new AddUnitCommand(realm, player, shuttle));
 

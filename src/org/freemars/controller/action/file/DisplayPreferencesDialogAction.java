@@ -15,7 +15,7 @@ public class DisplayPreferencesDialogAction extends AbstractAction {
     private FreeMarsController controller;
 
     public DisplayPreferencesDialogAction(FreeMarsController controller) {
-        super("Preferências", null);
+        super("PreferÃªncias", null);
         this.controller = controller;
     }
 
