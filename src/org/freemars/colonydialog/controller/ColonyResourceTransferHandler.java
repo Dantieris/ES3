@@ -26,7 +26,7 @@ public class ColonyResourceTransferHandler extends ResourceTransferHandler {
         JTable jTable = (JTable) c;
         int row = jTable.getSelectedRow();
         //
-        Object value = ((ArrayList)jTable.getValueAt(row, 1));//.get(1);
+        Object value = ((ArrayList)jTable.getValueAt(row, 1)).get(1);
         Logger.getLogger(this.getClass()).debug(value.getClass());
         //
         String resource = value.toString();
