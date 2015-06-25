@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.freemars.FreeMarsLauncher;
 import org.freemars.controller.FreeMarsController;
 import org.freemars.controller.action.file.ContinueGameAction;
+import org.freemars.controller.action.file.QuickLoadGameAction;
 import org.freemars.editor.EditorModel;
 import org.freemars.ui.mainmenu.MainMenuFrame;
 import org.freemars.ui.mainmenu.MenuWindow;
