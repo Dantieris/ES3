@@ -1,6 +1,9 @@
 package org.freemars;
 
+import java.util.Locale;
+
 import javax.swing.JPanel;
+
 import org.apache.log4j.Logger;
 import org.freerealm.xmlwrapper.TagManager;
 import org.freemars.controller.FreeMarsController;
@@ -12,7 +15,8 @@ import org.freemars.controller.FreeMarsController;
 public class FreeMarsLauncher extends JPanel {
 
     public static void main(final String[] args) {
-        initialize();
+    	System.out.println(Locale.getDefault());
+    	initialize();
         final FreeMarsController freeMarsController = new FreeMarsController();
         freeMarsController.initGameFrame();
         freeMarsController.startViewCommandExecutionThread();
