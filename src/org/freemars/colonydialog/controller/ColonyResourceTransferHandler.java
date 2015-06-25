@@ -1,8 +1,12 @@
 package org.freemars.colonydialog.controller;
 
 import java.awt.datatransfer.Transferable;
+import java.util.ArrayList;
+
 import javax.swing.JComponent;
 import javax.swing.JTable;
+
+import org.apache.log4j.Logger;
 import org.freemars.colonydialog.ColonyDialogModel;
 import org.freemars.controller.FreeMarsController;
 
@@ -21,7 +25,11 @@ public class ColonyResourceTransferHandler extends ResourceTransferHandler {
         getModel().setResourceTransferSource(getModel().getColony());
         JTable jTable = (JTable) c;
         int row = jTable.getSelectedRow();
-        String resource = jTable.getValueAt(row, 1).toString();
+        //
+        Object value = ((ArrayList)jTable.getValueAt(row, 1));//.get(1);
+        Logger.getLogger(this.getClass()).debug(value.getClass());
+        //
+        String resource = value.toString();
         int requestedTransferAmount = getModel().getResourceTransferAmount();
         int colonyResourceQuantity = getModel().getColony().getResourceQuantity(getModel().getRealm().getResourceManager().getResource(resource));
         int quantity = requestedTransferAmount > colonyResourceQuantity ? colonyResourceQuantity : requestedTransferAmount;
